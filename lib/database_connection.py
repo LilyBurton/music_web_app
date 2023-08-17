@@ -10,10 +10,10 @@ from psycopg.rows import dict_row
 # That's why we have provided it!
 class DatabaseConnection:
     # VVV CHANGE BOTH OF THESE VVV
-    DEV_DATABASE_NAME = "DEFAULT_MAKERS_PROJECT"
-    TEST_DATABASE_NAME = "DEFAULT_MAKERS_PROJECT_TEST"
+    DEV_DATABASE_NAME = "music_web_app"
+    TEST_DATABASE_NAME = "music_web_app_test"
 
-    def __init__(self, test_mode=False):
+    def __init__(self, test_mode=True):
         self.test_mode = test_mode
 
     # This method connects to PostgreSQL using the psycopg library. We connect
