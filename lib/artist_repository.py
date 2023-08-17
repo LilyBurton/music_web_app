@@ -8,7 +8,7 @@ class ArtistRepository:
 
     # Retrieve all artists
     def all(self):
-        rows = self._connection.execute('SELECT * from artists')
+        rows = self._connection.execute('SELECT * FROM artists')
         artists = []
         for row in rows:
             item = Artist(row["id"], row["name"], row["genre"])

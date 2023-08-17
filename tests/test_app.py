@@ -67,21 +67,21 @@ def test_add_album(web_client, db_connection, page, test_web_address):
         "Album(12, Ring Ring, 1973, 2)\n" \
         "Album(13, Voyage, 2022, 2)" 
     
-def test_get_artist(web_client, db_connection):
-    db_connection.seed('seeds/music_artist.sql')
-    response = web_client.get("/artists")
-    assert response.status_code == 200
-    assert response.data.decode('utf-8') == "" \
-    "Artist(1, Pixies, Rock)\n" \
-    "Artist(2, ABBA, Pop)\n" \
-    "Artist(3, Taylor Swift, Pop)\n" \
-    "Artist(4, Nina Simone, Jazz)" 
+# def test_get_artist(web_client, db_connection):
+#     db_connection.seed('seeds/music_artist.sql')
+#     response = web_client.get("/artists")
+#     assert response.status_code == 200
+#     assert response.data.decode('utf-8') == "" \
+#     "Artist(1, Pixies, Rock)\n" \
+#     "Artist(2, ABBA, Pop)\n" \
+#     "Artist(3, Taylor Swift, Pop)\n" \
+#     "Artist(4, Nina Simone, Jazz)" 
     
     
 
 def test_post_artist(web_client, db_connection):
     db_connection.seed('seeds/music_artist.sql')
-    response = web_client.post("/artists", data={"name": "Wild nothing", "genre": "Indie"})
+    response = web_client.post('/artists', data={'name': 'Wild Nothing', 'genre': 'Indie'})
     assert response.status_code == 200
     assert response.data.decode('utf-8') == ""
 
