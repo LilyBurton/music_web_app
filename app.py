@@ -1,4 +1,5 @@
 import os
+import sys
 from flask import Flask, request, render_template
 from lib.album_repository import AlbumRepository
 from lib.albums import Album
@@ -36,8 +37,21 @@ def get_albums():
     connection = get_flask_database_connection(app)
     repository = AlbumRepository(connection)
     albums = repository.all()
-    album_string = [f"{album}" for album in albums]
-    return "\n".join(album_string)
+    return render_template("/albums/index.html", albums=albums)
+
+@app.route('/1', methods=['GET'])
+def get_album_1():
+    connection = get_flask_database_connection(app)
+    repository = AlbumRepository(connection)
+    albums = repository.all()
+    return render_template("/albums/1.html", albums=albums)
+
+@app.route('/2', methods=['GET'])
+def get_album_2():
+    connection = get_flask_database_connection(app)
+    repository = AlbumRepository(connection)
+    albums = repository.all()
+    return render_template("/albums/2.html", albums=albums)
 
 @app.route('/albums', methods=['POST'])
 def add_album():
