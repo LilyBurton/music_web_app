@@ -44,14 +44,35 @@ def get_album_1():
     connection = get_flask_database_connection(app)
     repository = AlbumRepository(connection)
     albums = repository.all()
-    return render_template("/albums/1.html", albums=albums)
+    return render_template("albums/1.html", albums=albums)
 
 @app.route('/2', methods=['GET'])
 def get_album_2():
     connection = get_flask_database_connection(app)
     repository = AlbumRepository(connection)
     albums = repository.all()
-    return render_template("/albums/2.html", albums=albums)
+    return render_template("albums/2.html", albums=albums)
+
+@app.route('/albums/<id>')
+def find_album(id):
+    connection = get_flask_database_connection(app)
+    repository = AlbumRepository(connection)
+    album = repository.find(id)
+    return render_template('albums/show.html', album=album)
+
+@app.route('/artists', methods=['GET'])
+def get_artists_list():
+    connection = get_flask_database_connection(app)
+    repository = ArtistRepository(connection)
+    artists = repository.all()
+    return render_template("/artists/index.html", artists=artists)
+
+@app.route('/artists/<id>')
+def find_an_artist(id):
+    connection = get_flask_database_connection(app)
+    repository = ArtistRepository(connection)
+    artist = repository.find(id)
+    return render_template('artists/show.html', artist=artist)
 
 @app.route('/albums', methods=['POST'])
 def add_album():
@@ -65,13 +86,13 @@ def add_album():
     repository.create(album)
     return '', 200
 
-@app.route('/artists')    
-def get_artists():
-    connection = get_flask_database_connection(app)
-    repository = ArtistRepository(connection)
-    artists = repository.all()
-    artist_string = [f"{artist}" for artist in artists]
-    return "\n".join(artist_string)
+# @app.route('/artists')    
+# def get_artists():
+#     connection = get_flask_database_connection(app)
+#     repository = ArtistRepository(connection)
+#     artists = repository.all()
+#     artist_string = [f"{artist}" for artist in artists]
+#     return "\n".join(artist_string)
 
 @app.route('/artists', methods=['POST'])
 def post_artist():
